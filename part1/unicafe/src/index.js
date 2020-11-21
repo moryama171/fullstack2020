@@ -13,6 +13,8 @@ const Button = ({ handleEvent, text }) => {
 
 const StatTitle = ()  => <h1>statistics</h1>
 
+const Statistics = ({ text, value }) => <div>{text} {value}</div>
+
 const App = () => {
   
   const [good, setGood] = useState(0);
@@ -30,6 +32,9 @@ const App = () => {
       <Button handleEvent={setToNeutral} text='neutral'/>
       <Button handleEvent={setToBad} text='bad'/>
       <StatTitle />
+      <Statistics value={good} text='good'/>
+      <Statistics value={neutral} text='neutral'/>
+      <Statistics value={bad} text='bad'/>
     </div>
   )
 }
