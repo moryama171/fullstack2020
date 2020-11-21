@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-const Title = () => <h1>give feedback</h1>;
+const PageTitle = () => <h1>give feedback</h1>;
 
 const Button = ({ handleEvent, text }) => {
   return (
@@ -10,6 +10,8 @@ const Button = ({ handleEvent, text }) => {
     </div>
   )
 }
+
+const StatTitle = ()  => <h1>statistics</h1>
 
 const App = () => {
   
@@ -23,10 +25,11 @@ const App = () => {
 
   return (
     <div>
-      <Title />
+      <PageTitle />
       <Button handleEvent={setToGood} text='good'/>
       <Button handleEvent={setToNeutral} text='neutral'/>
       <Button handleEvent={setToBad} text='bad'/>
+      <StatTitle />
     </div>
   )
 }
