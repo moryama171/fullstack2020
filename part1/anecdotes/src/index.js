@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
+const Title = ({ text }) => <h1>{text}</h1>;
+
 const Button = ({ eventHandler, text }) => {
   return (
     <div>
@@ -24,12 +26,19 @@ const App = (props) => {
     setVotes(updatedVotes)
   }
 
+  const mostVotes = Math.max(...votes);
+  const mostVoted = anecdotes[votes.indexOf(mostVotes)];
+
   return (
     <div>
+      <Title text='Anecdote of the day'/>
       <p>{props.anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <Button eventHandler={voteAnecdote} text='vote'/>
       <Button eventHandler={getRandomAnecdote} text='next anecdote'/>
+      <Title text='Anecdote with most votes'/>
+      <p>{mostVoted}</p>
+      <p>has {mostVotes} votes</p>
     </div>
   )
 }
