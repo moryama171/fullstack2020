@@ -14,21 +14,23 @@ const Button = ({ handleEvent, text }) => {
 const StatTitle = ()  => <h1>statistics</h1>
 
 const Statistics = ({ data }) => {
-  // Avoid showing NaN at start
   if (data.totalVotes.value === 0) {
-    data.averageScore.value = 0;
-    data.percentageOfPositive.value = 0;
+    return (
+      <p>No feedback given</p>
+    )
   }
-  return (
-  <div>
-    <p>{data.goodStats.text} {data.goodStats.value}</p>
-    <p>{data.neutralStats.text} {data.neutralStats.value}</p>
-    <p>{data.badStats.text} {data.badStats.value}</p>
-    <p>{data.totalVotes.text} {data.totalVotes.value}</p>
-    <p>{data.averageScore.text} {data.averageScore.value}</p>
-    <p>{data.percentageOfPositive.text} {data.percentageOfPositive.value}%</p>
-  </div>
-  )
+  else {
+    return (
+      <div>
+        <p>{data.goodStats.text} {data.goodStats.value}</p>
+        <p>{data.neutralStats.text} {data.neutralStats.value}</p>
+        <p>{data.badStats.text} {data.badStats.value}</p>
+        <p>{data.totalVotes.text} {data.totalVotes.value}</p>
+        <p>{data.averageScore.text} {data.averageScore.value}</p>
+        <p>{data.percentageOfPositive.text} {data.percentageOfPositive.value}%</p>
+      </div>
+    )
+  }
 }
 
 const App = () => {
