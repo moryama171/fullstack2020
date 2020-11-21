@@ -13,7 +13,15 @@ const Button = ({ handleEvent, text }) => {
 
 const StatTitle = ()  => <h1>statistics</h1>
 
-const Statistics = ({ text, value }) => <div>{text} {value}</div>
+const Statistics = ({ data }) => {
+  return (
+  <div>
+    <p>{data.goodStats.text} {data.goodStats.value}</p>
+    <p>{data.neutralStats.text} {data.neutralStats.value}</p>
+    <p>{data.badStats.text} {data.badStats.value}</p>
+  </div>
+  )
+}
 
 const App = () => {
   
@@ -25,6 +33,18 @@ const App = () => {
   const setToNeutral = () => setNeutral(neutral + 1);
   const setToBad = () => setBad(bad + 1);
 
+  const stats = {
+    goodStats: {
+      text: 'good', 
+      value: good},
+    neutralStats: {
+      text: 'neutral', 
+      value: neutral},
+    badStats: {
+      text: 'bad',
+      value: bad}
+  }
+
   return (
     <div>
       <PageTitle />
@@ -32,9 +52,7 @@ const App = () => {
       <Button handleEvent={setToNeutral} text='neutral'/>
       <Button handleEvent={setToBad} text='bad'/>
       <StatTitle />
-      <Statistics value={good} text='good'/>
-      <Statistics value={neutral} text='neutral'/>
-      <Statistics value={bad} text='bad'/>
+      <Statistics data={stats}/>
     </div>
   )
 }
