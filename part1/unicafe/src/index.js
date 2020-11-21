@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
+const Title = () => <h1>give feedback</h1>
+
 const App = () => {
   
   const [good, setGood] = useState(0);
@@ -9,6 +11,7 @@ const App = () => {
 
   return (
     <div>
+      <Title />
     </div>
   )
 }
