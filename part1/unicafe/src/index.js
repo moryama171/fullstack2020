@@ -13,8 +13,8 @@ const Button = ({ handleEvent, text }) => {
 
 const StatTitle = ()  => <h1>statistics</h1>;
 
-const Statistics = ({ data }) => {
-  if (data.totalVotes.value === 0) {
+const Statistics = ({stats, labels}) => {
+  if (stats.totalVotes === 0) {
     return (
       <p>No feedback given</p>
     )
@@ -23,30 +23,34 @@ const Statistics = ({ data }) => {
     return (
       <div>
         <table>
-          <tr>
-            <td>{data.goodStats.text}</td>
-            <td>{data.goodStats.value}</td>
-          </tr>
-          <tr>
-            <td>{data.neutralStats.text}</td>
-            <td>{data.neutralStats.value}</td>
-          </tr>
-          <tr>
-            <td>{data.badStats.text}</td>
-            <td>{data.badStats.value}</td>
-          </tr>
-          <tr>
-            <td>{data.totalVotes.text}</td>
-            <td>{data.totalVotes.value}</td>
-          </tr>
-          <tr>
-            <td>{data.averageScore.text}</td>
-            <td>{data.averageScore.value}</td>
-          </tr>
-          <tr>
-            <td>{data.percentageOfPositive.text}</td>
-            <td>{data.percentageOfPositive.value}</td>
-          </tr>
+          <thead></thead>
+          <tbody>
+            <tr>
+              <td>{labels.good}</td>
+              <td>{stats.good}</td>
+            </tr>
+            <tr>
+              <td>{labels.neutral}</td>
+              <td>{stats.neutral}</td>
+            </tr>
+            <tr>
+              <td>{labels.bad}</td>
+              <td>{stats.bad}</td>
+            </tr>
+            <tr>
+              <td>{labels.totalVotes}</td>
+              <td>{stats.totalVotes}</td>
+            </tr>
+            <tr>
+              <td>{labels.averageScore}</td>
+              <td>{stats.averageScore}</td>
+            </tr>
+            <tr>
+              <td>{labels.positivePercentage}</td>
+              <td>{stats.positivePercentage}</td>
+            </tr>
+          </tbody>
+          <tfoot></tfoot>
         </table>
       </div>
     )
@@ -55,57 +59,47 @@ const Statistics = ({ data }) => {
 
 const App = () => {
   
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
+  const [goodVotes, setGood] = useState(0);
+  const [neutralVotes, setNeutral] = useState(0);
+  const [badVotes, setBad] = useState(0);
 
-  const setToGood = () => setGood(good + 1);
-  const setToNeutral = () => setNeutral(neutral + 1);
-  const setToBad = () => setBad(bad + 1);
+  const setToGood = () => setGood(goodVotes + 1);
+  const setToNeutral = () => setNeutral(neutralVotes + 1);
+  const setToBad = () => setBad(badVotes + 1);
 
-  const totalVotesValue = good + neutral + bad;  
-  const averageScoreValue = (good - bad) / totalVotesValue;
-  const percentageOfPositiveValue = (good * 100) / totalVotesValue + '%';
+  const totalVotesNum = goodVotes + neutralVotes + badVotes;  
+  const averageScoreValue = (goodVotes - badVotes) / totalVotesNum;
+  const positivePercentageValue = (goodVotes * 100) / totalVotesNum + '%';
+
+  const labels = {
+    good: 'good', 
+    neutral: 'neutral',
+    bad: 'bad',
+    totalVotes: 'all',
+    averageScore: 'average',
+    positivePercentage: 'positive'
+  }
 
   const stats = {
-    goodStats: {
-      text: 'good', 
-      value: good
-    },
-    neutralStats: {
-      text: 'neutral', 
-      value: neutral
-    },
-    badStats: {
-      text: 'bad',
-      value: bad
-    },
-    totalVotes: {
-      text: 'all',
-      value: totalVotesValue
-    },
-    averageScore: {
-      text: 'average',
-      value: averageScoreValue
-    },
-    percentageOfPositive: {
-      text: 'positive',
-      value: percentageOfPositiveValue
-    }
+    good: goodVotes,
+    neutral: neutralVotes,
+    bad: badVotes,
+    totalVotes: totalVotesNum,
+    averageScore: averageScoreValue,
+    positivePercentage: positivePercentageValue
   }
 
   return (
     <div>
       <PageTitle />
-      <Button handleEvent={setToGood} text='good'/>
-      <Button handleEvent={setToNeutral} text='neutral'/>
-      <Button handleEvent={setToBad} text='bad'/>
+      <Button handleEvent={setToGood} text={labels.good}/>
+      <Button handleEvent={setToNeutral} text={labels.neutral}/>
+      <Button handleEvent={setToBad} text={labels.bad}/>
       <StatTitle />
-      <Statistics data={stats}/>
+      <Statistics stats={stats} labels={labels}/>
     </div>
   )
 }
-
 
 ReactDOM.render(
   <React.StrictMode>
