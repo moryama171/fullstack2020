@@ -19,6 +19,7 @@ const Statistics = ({ data }) => {
     <p>{data.goodStats.text} {data.goodStats.value}</p>
     <p>{data.neutralStats.text} {data.neutralStats.value}</p>
     <p>{data.badStats.text} {data.badStats.value}</p>
+    <p>{data.totalVotes.text} {data.totalVotes.value}</p>
   </div>
   )
 }
@@ -42,7 +43,11 @@ const App = () => {
       value: neutral},
     badStats: {
       text: 'bad',
-      value: bad}
+      value: bad},
+    totalVotes: {
+      text: 'all',
+      value: good + neutral + bad
+    }
   }
 
   return (
