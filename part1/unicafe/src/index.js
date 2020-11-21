@@ -13,12 +13,6 @@ const Button = ({ handleEvent, text }) => {
 
 const StatTitle = ()  => <h1>statistics</h1>;
 
-const Statistic = ({ text, value }) => {
-  return (
-  <p>{text} {value}</p>
-  )
-}
-
 const Statistics = ({ data }) => {
   if (data.totalVotes.value === 0) {
     return (
@@ -28,12 +22,32 @@ const Statistics = ({ data }) => {
   else {
     return (
       <div>
-        <Statistic text={data.goodStats.text} value={data.goodStats.value}/>
-        <Statistic text={data.neutralStats.text} value={data.neutralStats.value}/>
-        <Statistic text={data.badStats.text} value={data.badStats.value}/>
-        <Statistic text={data.totalVotes.text} value={data.totalVotes.value}/>
-        <Statistic text={data.averageScore.text} value={data.averageScore.value}/>
-        <Statistic text={data.percentageOfPositive.text} value={data.percentageOfPositive.value}/>
+        <table>
+          <tr>
+            <td>{data.goodStats.text}</td>
+            <td>{data.goodStats.value}</td>
+          </tr>
+          <tr>
+            <td>{data.neutralStats.text}</td>
+            <td>{data.neutralStats.value}</td>
+          </tr>
+          <tr>
+            <td>{data.badStats.text}</td>
+            <td>{data.badStats.value}</td>
+          </tr>
+          <tr>
+            <td>{data.totalVotes.text}</td>
+            <td>{data.totalVotes.value}</td>
+          </tr>
+          <tr>
+            <td>{data.averageScore.text}</td>
+            <td>{data.averageScore.value}</td>
+          </tr>
+          <tr>
+            <td>{data.percentageOfPositive.text}</td>
+            <td>{data.percentageOfPositive.value}</td>
+          </tr>
+        </table>
       </div>
     )
   }
