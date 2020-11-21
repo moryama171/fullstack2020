@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 const App = (props) => {
   const [selected, setSelected] = useState(0);
+  const randomNum = Math.floor((Math.random() * anecdotes.length) + 1);
+  const getRandom = () => setSelected(randomNum);
 
   return (
     <div>
