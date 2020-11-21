@@ -17,6 +17,7 @@ const Statistics = ({ data }) => {
   // Avoid showing NaN at start
   if (data.totalVotes.value === 0) {
     data.averageScore.value = 0;
+    data.percentageOfPositive.value = 0;
   }
   return (
   <div>
@@ -25,6 +26,7 @@ const Statistics = ({ data }) => {
     <p>{data.badStats.text} {data.badStats.value}</p>
     <p>{data.totalVotes.text} {data.totalVotes.value}</p>
     <p>{data.averageScore.text} {data.averageScore.value}</p>
+    <p>{data.percentageOfPositive.text} {data.percentageOfPositive.value}%</p>
   </div>
   )
 }
@@ -39,8 +41,9 @@ const App = () => {
   const setToNeutral = () => setNeutral(neutral + 1);
   const setToBad = () => setBad(bad + 1);
 
-  const totalVotesNum = good + neutral + bad;  
-  const averageScoreValue = (good - bad) / totalVotesNum;
+  const totalVotesValue = good + neutral + bad;  
+  const averageScoreValue = (good - bad) / totalVotesValue;
+  const percentageOfPositiveValue = (good * 100) / totalVotesValue;
 
   const stats = {
     goodStats: {
@@ -57,11 +60,15 @@ const App = () => {
     },
     totalVotes: {
       text: 'all',
-      value: totalVotesNum
+      value: totalVotesValue
     },
     averageScore: {
       text: 'average',
       value: averageScoreValue
+    },
+    percentageOfPositive: {
+      text: 'positive',
+      value: percentageOfPositiveValue
     }
   }
 
