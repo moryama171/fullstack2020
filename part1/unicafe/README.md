@@ -37,7 +37,7 @@ Javascript follows [ES10](http://www.ecma-international.org/ecma-262/10.0/index.
 
 ## Usage
 
-First clone the project and navigate to ``courseinfo/``.
+First clone the project and navigate to ``unicafe/``.
 
 Then run:
 
