@@ -11,7 +11,13 @@ const Button = ({ handleEvent, text }) => {
   )
 }
 
-const StatTitle = ()  => <h1>statistics</h1>
+const StatTitle = ()  => <h1>statistics</h1>;
+
+const Statistic = ({ text, value }) => {
+  return (
+  <p>{text} {value}</p>
+  )
+}
 
 const Statistics = ({ data }) => {
   if (data.totalVotes.value === 0) {
@@ -22,12 +28,12 @@ const Statistics = ({ data }) => {
   else {
     return (
       <div>
-        <p>{data.goodStats.text} {data.goodStats.value}</p>
-        <p>{data.neutralStats.text} {data.neutralStats.value}</p>
-        <p>{data.badStats.text} {data.badStats.value}</p>
-        <p>{data.totalVotes.text} {data.totalVotes.value}</p>
-        <p>{data.averageScore.text} {data.averageScore.value}</p>
-        <p>{data.percentageOfPositive.text} {data.percentageOfPositive.value}%</p>
+        <Statistic text={data.goodStats.text} value={data.goodStats.value}/>
+        <Statistic text={data.neutralStats.text} value={data.neutralStats.value}/>
+        <Statistic text={data.badStats.text} value={data.badStats.value}/>
+        <Statistic text={data.totalVotes.text} value={data.totalVotes.value}/>
+        <Statistic text={data.averageScore.text} value={data.averageScore.value}/>
+        <Statistic text={data.percentageOfPositive.text} value={data.percentageOfPositive.value}/>
       </div>
     )
   }
@@ -45,7 +51,7 @@ const App = () => {
 
   const totalVotesValue = good + neutral + bad;  
   const averageScoreValue = (good - bad) / totalVotesValue;
-  const percentageOfPositiveValue = (good * 100) / totalVotesValue;
+  const percentageOfPositiveValue = (good * 100) / totalVotesValue + '%';
 
   const stats = {
     goodStats: {
