@@ -35,8 +35,19 @@ const Total = ({ course }) => {
   )
 }
 
+const Course = ({ course }) => {
+  return (
+    <div>
+      <Header course={course}/>
+      <Content course={course}/>
+      <Total course={course}/>
+    </div>
+  )
+}
+
 const App = () => {
   const course = {
+    id: 1,
     name: 'Half Stack application development',
     parts : [
       {
@@ -53,13 +64,7 @@ const App = () => {
       }
     ]
   }
-  return (
-    <div>
-      <Header course={course}/>
-      <Content course={course}/>
-      <Total course={course}/>
-    </div>
-  )
+  return <Course course={course} />
 }
 
 ReactDOM.render(
