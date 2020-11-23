@@ -11,6 +11,15 @@ const Button = ({ eventHandler, text }) => {
   )
 }
 
+const DisplayAnecdote = ({ anecdote, votes }) => {
+  return (
+    <div>
+      <p>{anecdote}</p>
+      <p>has {votes} votes</p>
+    </div>
+  )
+}
+
 const App = (props) => {
   const [selected, setSelected] = useState(0);
   const getRandomAnecdote = () => {
@@ -18,7 +27,7 @@ const App = (props) => {
     setSelected(randomNum);
   }
 
-  // source https://stackoverflow.com/a/37377279
+  // Make array of n elements: source https://stackoverflow.com/a/37377279
   const [votes, setVotes] = useState(Array.from(Array(anecdotes.length), () => 0));
   const voteAnecdote = () => {
     const updatedVotes = [...votes];
@@ -26,19 +35,19 @@ const App = (props) => {
     setVotes(updatedVotes)
   }
 
+  const randomAnecdote = anecdotes[selected];
+  const anecdoteVotes = votes[selected];
   const mostVotes = Math.max(...votes);
   const mostVoted = anecdotes[votes.indexOf(mostVotes)];
 
   return (
     <div>
       <Title text='Anecdote of the day'/>
-      <p>{props.anecdotes[selected]}</p>
-      <p>has {votes[selected]} votes</p>
+      <DisplayAnecdote anecdote={randomAnecdote} votes={anecdoteVotes}/>
       <Button eventHandler={voteAnecdote} text='vote'/>
       <Button eventHandler={getRandomAnecdote} text='next anecdote'/>
       <Title text='Anecdote with most votes'/>
-      <p>{mostVoted}</p>
-      <p>has {mostVotes} votes</p>
+      <DisplayAnecdote anecdote={mostVoted} votes={mostVotes}/>
     </div>
   )
 }
