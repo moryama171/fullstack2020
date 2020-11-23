@@ -9,6 +9,8 @@ This application shows information about a course.
 - React components
 - JSX
 - passing data with props
+- rendering collections
+- key-attribute
 - JS arrow functions
 - JS objects
 - basic debugging of JS

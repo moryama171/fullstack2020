@@ -19,11 +19,11 @@ const Part = (props) => {
 
 const Content = ({ course }) => {
   return (
-    <>
-      <Part part={course.parts[0]}/>
-      <Part part={course.parts[1]}/>
-      <Part part={course.parts[2]}/>
-    </>
+    <div>
+      {course.parts.map(part =>
+        <Part key={part.id} part={part}/>
+      )}
+    </div>
   )
 }
 
@@ -52,15 +52,18 @@ const App = () => {
     parts : [
       {
         name: 'Fundamentals of React',
-        exercises: 10
+        exercises: 10,
+        id: 1
       },
       {
         name: 'Using props to pass data',
-        exercises: 7
+        exercises: 7,
+        id: 2
       },
       {
         name: 'State of a component',
-        exercises: 14
+        exercises: 14,
+        id: 3
       }
     ]
   }
