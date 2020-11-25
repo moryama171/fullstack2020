@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
+import Filter from './components/Filter'
+import Persons from './components/Persons'
 
-const App = () => {
-    const [persons, setPersons ] = useState([
-        {name: 'Arto Hellas',
-         number: '39-00-1234567'},
-        {name: 'Ada Lovelace',
-         number: '39-44-5323523'},
-        {name: 'Dan Abramov',
-         number: '12-43-234345'},
-        {name: 'Mary Poppendieck',
-        number: '39-23-6423122'}
-    ]);
 
+const App = ({ phonebook }) => {
+    const [persons, setPersons ] = useState(phonebook);
     const [newName, setNewName] = useState('');
     const [newNumber, setNewNumber] = useState('');
     const [filterString, setFilterString] = useState('');
@@ -54,11 +47,10 @@ const App = () => {
     return (
         <div>
             <h2>Phonebook</h2>
-            filter by name 
-                <input
-                    value={filterString}
-                    onChange={handleFilter}
-                />
+            <Filter 
+                filterString={filterString}
+                handleFilter={handleFilter}
+            />
             <h2>Add new person</h2>
             <form onSubmit={addNewPerson}>
                 <div>
@@ -80,11 +72,7 @@ const App = () => {
                 </div>
             </form>
             <h2>Numbers</h2>
-            <div>
-                {personsToShow.map(person => 
-                    <p key={person.name}>{person.name} {person.number}</p>
-                )}
-            </div>
+            <Persons personsToShow={personsToShow}/>
         </div>
     )
 }
