@@ -6,11 +6,11 @@ This application takes user feedback and shows appreciation statistics.
 
 ## Learning focus
 
-- 
-
-## Notes
-
-### 
+- forms
+- controlled components
+- filter displayed elements
+- JS conditionals
+- JS `.filter()`
 
 ## Stack
 
