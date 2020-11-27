@@ -5,6 +5,8 @@ import axios from 'axios';
 const App = () => {
 
     const [countries, setCountries] = useState([]);
+    const [filterString, setFilterString] = useState('');
+    const [showAll, setShowAll] = useState(true);
 
     const hook = () => {
         axios
@@ -15,15 +17,33 @@ const App = () => {
     }
     useEffect(hook, [])
 
+    const matchingCountries = countries.filter(country => country.name.toLowerCase().includes(filterString.toLowerCase()));
+    const countriesToShow = showAll
+        ? countries
+        : matchingCountries
+
+    const handleFilterChange = (event) => {
+        setFilterString(event.target.value);
+
+        event.target.value === ''
+        ? setShowAll(true)
+        : setShowAll(false)
+
+    }
+
     return (
         <div>
-            <ul>
-                {countries.map(country => 
-                        <li>
-                            {country.name}
-                        </li>
-                )}
-            </ul>
+            find countries
+            <input
+                value={filterString}
+                onChange={handleFilterChange}
+            />
+            {countriesToShow.map(country => 
+                <div key={country.name}>
+                    {country.name}
+                </div>
+            )}
+
         </div>
     )
 }
