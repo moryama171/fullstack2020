@@ -9,6 +9,9 @@ This application is a simple phonebook.
 - forms
 - controlled components
 - filter displayed elements
+- json-server for development
+- axios library
+- JS asynchronous behaviour
 - JS conditionals
 - JS `.filter()`
 
@@ -18,6 +21,8 @@ This application is a simple phonebook.
 - *controlled* refers to how we *store* and *access* the values. For example in the case of a `<form>`:
   - *uncontrolled* means that values are stored in DOM and accessed by reaching the DOM and pulling out each input field
   - *controlled* means that values are stored and accessed as a state of a React component and updated dinamically via ``onChange``
+
+### Asynchronous behaviour
 
 ## Stack
 
