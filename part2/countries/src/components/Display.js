@@ -6,8 +6,8 @@ const Display = ({ content }) => {
 
     if (content.length === 1) {
         return (
-            <Country data={content}/>
-        )
+            <Country data={content} />
+        );
     }
 
     if (content.length > 10) {
@@ -18,7 +18,7 @@ const Display = ({ content }) => {
     else {
         return (
             <div>
-                {content.map(country => 
+                {content.map(country =>
                     <div key={country.name}>
                         {country.name}
                     </div>
@@ -26,6 +26,6 @@ const Display = ({ content }) => {
             </div>
         );
     }
-}
+};
 
 export default Display;

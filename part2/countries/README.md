@@ -9,7 +9,8 @@ This is an app where you can look up data of various countries.
 - forms
 - controlled components
 - filter displayed elements
-- json-server for development
+- conditional rendering
+- fetching data from a server
 - axios library
 - JS asynchronous behaviour
 - JS conditionals

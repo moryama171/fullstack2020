@@ -6,7 +6,7 @@ const Country = ({ data }) => {
     return (
         <div>
             <h1>{data.name}</h1>
-             <p>capital: {data.capital}</p>
+            <p>capital: {data.capital}</p>
             <p>population: {data.population}</p>
             <h3>Languages</h3>
             <ul>
@@ -19,7 +19,7 @@ const Country = ({ data }) => {
             </ul>
             <img alt="flag.jpg" src={data.flag}></img>
         </div>
-    )
-}
+    );
+};
 
 export default Country;

@@ -9,7 +9,7 @@ const Filter = ({ text, value, onChange }) => {
                 onChange={onChange}
             />
         </div>
-    )
-}
+    );
+};
 
 export default Filter;
