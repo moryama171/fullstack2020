@@ -62,6 +62,11 @@ const App = () => {
             ? setShowAll(true)
             : setShowAll(false);
     };
+    const confirmDropPerson = (person) => {
+        if (window.confirm(`Delete ${person.name}?`)) {
+            dropPerson(person.id);
+        }
+    }
 
     return (
         <div>
@@ -86,7 +91,7 @@ const App = () => {
                     <Person
                         key={person.id}
                         person={person}
-                        drop={() => dropPerson(person.id)}
+                        drop={() => confirmDropPerson(person)}
                     />
                 )}
             </div>
