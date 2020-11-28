@@ -20,26 +20,25 @@ const App = () => {
     }, []);
 
     const updatePerson = (id, updatedInfo) => {
-
         personService
             .update(id, updatedInfo)
             .then(returnedPerson => {
-                setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
-            })
+                setPersons(persons.map(person =>
+                    person.id !== id ? person : returnedPerson));
+            });
     };
 
     const addNewPerson = (event) => {
         event.preventDefault();
 
         // Handle adding duplicates
-        const existingPerson = persons.find(person => person['name'] === newName);
-        const updatedPerson = {
-            name: existingPerson.name,
-            number: newNumber
-        }
-
+        const existingPerson = persons.find(person => person.name === newName);
         if (existingPerson) {
             if (window.confirm(`${existingPerson.name} is already added to phonebook. replace the old number with this one?`)) {
+                const updatedPerson = {
+                    name: existingPerson.name,
+                    number: newNumber
+                };
                 updatePerson(existingPerson.id, updatedPerson);
             }
             return;
@@ -57,10 +56,12 @@ const App = () => {
         setNewNumber('');
     };
 
-    const dropPerson = (id) => {
-        personService
-            .drop(id);
-        setPersons(persons.filter(person => person.id !== id));
+    const dropPerson = (person) => {
+        if (window.confirm(`Delete ${person.name}?`)) {
+            personService
+                .drop(person.id);
+            setPersons(persons.filter(p => p.id !== person.id));
+        }
     };
 
     const personsToShow = showAll
@@ -73,16 +74,12 @@ const App = () => {
     const handleNumberChange = (event) => {
         setNewNumber(event.target.value);
     };
+
     const handleFilter = (event) => {
         setFilterString(event.target.value);
         event.target.value === ''
             ? setShowAll(true)
             : setShowAll(false);
-    };
-    const confirmDropPerson = (person) => {
-        if (window.confirm(`Delete ${person.name}?`)) {
-            dropPerson(person.id);
-        }
     };
 
     return (
@@ -108,7 +105,7 @@ const App = () => {
                     <Person
                         key={person.id}
                         person={person}
-                        drop={() => confirmDropPerson(person)}
+                        drop={() => dropPerson(person)}
                     />
                 )}
             </div>
