@@ -11,13 +11,13 @@ const Country = ({ data }) => {
             <h3>Languages</h3>
             <ul>
                 {data.languages.map(language =>
-                    <li
+                    <li className="capitalize"
                         key={language.name}>
                         {language.nativeName}
                     </li>
                 )}
             </ul>
-            <img src={data.flag}></img>
+            <img alt="flag.jpg" src={data.flag}></img>
         </div>
     )
 }
