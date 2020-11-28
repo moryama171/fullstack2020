@@ -3,23 +3,22 @@ import axios from 'axios';
 import Filter from './components/Filter';
 import Persons from './components/Persons';
 import Form from './components/Form';
-
+import noteService from './service/persons';
 
 const App = () => {
-    const [persons, setPersons ] = useState([]);
+    const [persons, setPersons] = useState([]);
     const [newName, setNewName] = useState('');
     const [newNumber, setNewNumber] = useState('');
     const [filterString, setFilterString] = useState('');
     const [showAll, setShowAll] = useState(true);
 
-    const hook = () => {
-        axios
-            .get('http://localhost:3001/persons')
-            .then(response => {
-                setPersons(response.data);
-            })
-    }
-    useEffect(hook, [])
+    useEffect(() => {
+        noteService
+            .getAll()
+            .then(savedPersons => {
+                setPersons(savedPersons);
+            });
+    });
 
     const addNewPerson = (event) => {
         event.preventDefault();
@@ -32,38 +31,38 @@ const App = () => {
         const newPersonObject = {
             name: newName,
             number: newNumber
-        }
+        };
         setPersons(persons.concat(newPersonObject));
         setNewName('');
         setNewNumber('');
-    }
+    };
 
     const personsToShow = showAll
-    ? persons
-    : persons.filter(person => person.name.toLowerCase().includes(filterString.toLowerCase()))
+        ? persons
+        : persons.filter(person => person.name.toLowerCase().includes(filterString.toLowerCase()));
 
     const handleNameChange = (event) => {
         setNewName(event.target.value);
-    }
+    };
     const handleNumberChange = (event) => {
         setNewNumber(event.target.value);
-    }
+    };
     const handleFilter = (event) => {
         setFilterString(event.target.value);
         event.target.value === ''
-        ? setShowAll(true)
-        : setShowAll(false)
-    }
+            ? setShowAll(true)
+            : setShowAll(false);
+    };
 
     return (
         <div>
             <h2>Phonebook</h2>
-            <Filter 
+            <Filter
                 filterString={filterString}
                 handleFilter={handleFilter}
             />
             <h2>Add new person</h2>
-            <Form 
+            <Form
                 onSubmit={addNewPerson}
                 nameValue={newName}
                 numberValue={newNumber}
@@ -73,9 +72,9 @@ const App = () => {
                 }}
             />
             <h2>Numbers</h2>
-            <Persons personsToShow={personsToShow}/>
+            <Persons personsToShow={personsToShow} />
         </div>
-    )
-}
+    );
+};
 
 export default App;
