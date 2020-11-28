@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Filter from './components/Filter';
 import Persons from './components/Persons';
 import Form from './components/Form';
-import noteService from './service/persons';
+import personService from './service/persons';
 
 const App = () => {
     const [persons, setPersons] = useState([]);
@@ -13,7 +12,7 @@ const App = () => {
     const [showAll, setShowAll] = useState(true);
 
     useEffect(() => {
-        noteService
+        personService
             .getAll()
             .then(savedPersons => {
                 setPersons(savedPersons);
@@ -32,7 +31,11 @@ const App = () => {
             name: newName,
             number: newNumber
         };
-        setPersons(persons.concat(newPersonObject));
+        personService
+            .create(newPersonObject)
+            .then(returnedPerson => {
+                setPersons(persons.concat(returnedPerson));
+            });
         setNewName('');
         setNewNumber('');
     };
