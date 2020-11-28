@@ -1,6 +1,14 @@
 import React from 'react';
+import Country from './Country';
+
 
 const Display = ({ content }) => {
+
+    if (content.length === 1) {
+        return (
+            <Country data={content}/>
+        )
+    }
 
     if (content.length > 10) {
         return (

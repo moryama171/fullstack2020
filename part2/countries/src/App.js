@@ -30,7 +30,6 @@ const App = () => {
 
     return (
         <div>
-            <div>countriesToShow: {countriesToShow.length} </div>
             <Filter
                 text='find countries'
                 value={filterString}
