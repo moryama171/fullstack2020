@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Filter from './components/Filter';
+import Display from './components/Display';
 
 
 const App = () => {
@@ -33,8 +35,8 @@ const App = () => {
 
     return (
         <div>
-            find countries
-            <input
+            <Filter
+                text='find countries'
                 value={filterString}
                 onChange={handleFilterChange}
             />
