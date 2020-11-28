@@ -19,12 +19,29 @@ const App = () => {
             });
     }, []);
 
+    const updatePerson = (id, updatedInfo) => {
+
+        personService
+            .update(id, updatedInfo)
+            .then(returnedPerson => {
+                setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
+            })
+    };
+
     const addNewPerson = (event) => {
         event.preventDefault();
 
-        // Prevent adding duplicates
-        if (persons.find(person => person['name'] === newName)) {
-            window.alert(`${newName} is already added to phonebook`);
+        // Handle adding duplicates
+        const existingPerson = persons.find(person => person['name'] === newName);
+        const updatedPerson = {
+            name: existingPerson.name,
+            number: newNumber
+        }
+
+        if (existingPerson) {
+            if (window.confirm(`${existingPerson.name} is already added to phonebook. replace the old number with this one?`)) {
+                updatePerson(existingPerson.id, updatedPerson);
+            }
             return;
         }
         const newPersonObject = {
@@ -42,7 +59,7 @@ const App = () => {
 
     const dropPerson = (id) => {
         personService
-            .drop(id)
+            .drop(id);
         setPersons(persons.filter(person => person.id !== id));
     };
 
@@ -66,7 +83,7 @@ const App = () => {
         if (window.confirm(`Delete ${person.name}?`)) {
             dropPerson(person.id);
         }
-    }
+    };
 
     return (
         <div>
