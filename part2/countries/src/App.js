@@ -8,7 +8,7 @@ const App = () => {
 
     const [countries, setCountries] = useState([]);
     const [filterString, setFilterString] = useState('');
-    const [showAll, setShowAll] = useState(true);
+    const [countriesToShow, setCountriesToShow] = useState([]);
 
     const hook = () => {
         axios
@@ -19,33 +19,24 @@ const App = () => {
     }
     useEffect(hook, [])
 
-    const matchingCountries = countries.filter(country => country.name.toLowerCase().includes(filterString.toLowerCase()));
-    const countriesToShow = showAll
-        ? countries
-        : matchingCountries
-
-    const handleFilterChange = (event) => {
+    const filteredCountries = countries.filter(country => country.name.toLowerCase().includes(filterString.toLowerCase()))
+    
+    const handleFilter = (event) => {
         setFilterString(event.target.value);
-
         event.target.value === ''
-        ? setShowAll(true)
-        : setShowAll(false)
-
+        ? setCountriesToShow([])
+        : setCountriesToShow(filteredCountries);
     }
 
     return (
         <div>
+            <div>countriesToShow: {countriesToShow.length} </div>
             <Filter
                 text='find countries'
                 value={filterString}
-                onChange={handleFilterChange}
+                onChange={handleFilter}
             />
-            {countriesToShow.map(country => 
-                <div key={country.name}>
-                    {country.name}
-                </div>
-            )}
-
+            <Display content={countriesToShow} />
         </div>
     )
 }
