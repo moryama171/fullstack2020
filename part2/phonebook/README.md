@@ -1,8 +1,8 @@
 # Part 2 / Phonebook
 
-This is my submission for the Full Stack Open [Course](https://fullstackopen.com/en) 2020, part 2.b.
+This is my submission for the Full Stack Open [Course](https://fullstackopen.com/en) 2020, part 2.b-d
 
-This application is a simple phonebook.
+This application is a simple phonebook where contacts can be searched, added, updated and deleted.
 
 ## Learning focus
 
