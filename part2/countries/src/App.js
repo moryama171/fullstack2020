@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './index.css'
 import Filter from './components/Filter';
 import Display from './components/Display';
 
