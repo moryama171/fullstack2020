@@ -6,7 +6,7 @@ const Display = ({ content }) => {
 
     if (content.length === 1) {
         return (
-            <Country data={content} />
+            <Country data={content[0]}/>
         );
     }
 

@@ -1,8 +1,6 @@
 import React from 'react';
 
 const Country = ({ data }) => {
-    data = data[0];
-    console.log(data);
     return (
         <div>
             <h1>{data.name}</h1>
