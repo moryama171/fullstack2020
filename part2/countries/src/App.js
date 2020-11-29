@@ -20,9 +20,8 @@ const App = () => {
     };
     useEffect(hook, []);
 
-    const filteredCountries = countries.filter(country => country.name.toLowerCase().includes(filterString.toLowerCase()));
-
     const handleFilter = (event) => {
+        const filteredCountries = countries.filter(country => country.name.toLowerCase().includes(event.target.value.toLowerCase()));
         setFilterString(event.target.value);
         event.target.value === ''
             ? setCountriesToShow([])
