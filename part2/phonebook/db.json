@@ -1,9 +1,6 @@
 {
   "persons": [
     {
-      "id": 1
-    },
-    {
       "name": "Ada Lovelace",
       "number": "39-44-5323523",
       "id": 2
@@ -20,8 +17,13 @@
     },
     {
       "name": "Mario",
-      "number": "12345",
+      "number": "67890",
       "id": 5
+    },
+    {
+      "name": "loredana",
+      "number": "1234",
+      "id": 6
     }
   ]
 }

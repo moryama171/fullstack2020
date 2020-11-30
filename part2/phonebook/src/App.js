@@ -26,10 +26,17 @@ const App = () => {
                 setPersons(persons.map(person =>
                     person.id !== id ? person : returnedPerson));
             });
+        // TODO: Set name+number values back to ''
     };
 
     const addNewPerson = (event) => {
         event.preventDefault();
+
+        console.log(newName, newNumber);
+        if (!newName || !newNumber) {
+            window.alert('Please fill in name and number');
+            return;
+        }
 
         // Handle adding duplicates
         const existingPerson = persons.find(person => person.name === newName);
