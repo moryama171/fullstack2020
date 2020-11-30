@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Filter from './components/Filter';
 import Person from './components/Person';
 import Form from './components/Form';
+import Notification from './components/Notification';
 import personService from './service/persons';
+
 
 const App = () => {
     const [persons, setPersons] = useState([]);
@@ -10,6 +12,7 @@ const App = () => {
     const [newNumber, setNewNumber] = useState('');
     const [filterString, setFilterString] = useState('');
     const [showAll, setShowAll] = useState(true);
+    const [notificationMessage, setNotificationMessage] = useState(null);
 
     useEffect(() => {
         personService
@@ -26,6 +29,7 @@ const App = () => {
                 setPersons(persons.map(person =>
                     person.id !== id ? person : returnedPerson));
             });
+        showNotification('Successfully updated contact');
         setNewName('');
         setNewNumber('');
     };
@@ -33,7 +37,6 @@ const App = () => {
     const addNewPerson = (event) => {
         event.preventDefault();
 
-        console.log(newName, newNumber);
         if (!newName || !newNumber) {
             window.alert('Please fill in name and number');
             return;
@@ -60,6 +63,7 @@ const App = () => {
             .then(returnedPerson => {
                 setPersons(persons.concat(returnedPerson));
             });
+        showNotification('Successfully added contact');
         setNewName('');
         setNewNumber('');
     };
@@ -90,9 +94,17 @@ const App = () => {
             : setShowAll(false);
     };
 
+    const showNotification = (message) => {
+        setNotificationMessage(message);
+        setTimeout(() => {
+            setNotificationMessage(null);
+        }, 5000);
+    };
+
     return (
         <div>
             <h2>Phonebook</h2>
+            <Notification message={notificationMessage} />
             <Filter
                 filterString={filterString}
                 handleFilter={handleFilter}
