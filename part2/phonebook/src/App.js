@@ -22,13 +22,17 @@ const App = () => {
             });
     }, []);
 
-    const updatePerson = (id, updatedInfo) => {
+    const updatePerson = (id, updatedPerson) => {
         personService
-            .update(id, updatedInfo)
+            .update(id, updatedPerson)
             .then(returnedPerson => {
                 setPersons(persons.map(person =>
                     person.id !== id ? person : returnedPerson));
+            })
+            .catch(error => {
+                showNotification(`${updatedPerson.name} was already deleted`);
             });
+        setPersons(persons.filter(p => p.id !== id));
         showNotification('Successfully updated contact');
         setNewName('');
         setNewNumber('');
