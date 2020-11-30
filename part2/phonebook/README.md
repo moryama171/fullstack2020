@@ -16,6 +16,7 @@ This application is a simple phonebook where contacts can be searched, added, up
 - JS asynchronous behaviour
 - JS conditionals
 - JS `.filter()`
+- inline styling
 
 ## Notes
 
