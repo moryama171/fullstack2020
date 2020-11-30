@@ -13,6 +13,7 @@ const App = () => {
     const [filterString, setFilterString] = useState('');
     const [showAll, setShowAll] = useState(true);
     const [notificationMessage, setNotificationMessage] = useState(null);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         personService
@@ -30,6 +31,7 @@ const App = () => {
                     person.id !== id ? person : returnedPerson));
             })
             .catch(error => {
+                setError(true)
                 showNotification(`${updatedPerson.name} was already deleted`);
             });
         setPersons(persons.filter(p => p.id !== id));
@@ -102,13 +104,14 @@ const App = () => {
         setNotificationMessage(message);
         setTimeout(() => {
             setNotificationMessage(null);
+            setError(false)
         }, 5000);
     };
 
     return (
         <div>
             <h2>Phonebook</h2>
-            <Notification message={notificationMessage} />
+            <Notification message={notificationMessage} error={error} />
             <Filter
                 filterString={filterString}
                 handleFilter={handleFilter}
