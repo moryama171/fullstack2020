@@ -4,6 +4,8 @@ This is my submission for the Full Stack Open [Course](https://fullstackopen.com
 
 This application is a simple phonebook where contacts can be searched, added, updated and deleted.
 
+Here you can find the [application](https://rocky-thicket-20623.herokuapp.com/).
+
 ## Learning focus
 
 - forms
@@ -17,6 +19,7 @@ This application is a simple phonebook where contacts can be searched, added, up
 - JS conditionals
 - JS `.filter()`
 - inline styling
+- connect front end to back end
 
 ## Notes
 
