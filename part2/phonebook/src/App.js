@@ -32,7 +32,7 @@ const App = () => {
             })
             .catch(error => {
                 setError(true);
-                showNotification(`${updatedPerson.name} was already deleted`);
+                showNotification(error.response.data.error);
             });
         setPersons(persons.filter(p => p.id !== id));
         showNotification('Successfully updated contact');
@@ -51,13 +51,11 @@ const App = () => {
         // Handle adding duplicates
         const existingPerson = persons.find(person => person.name === newName);
         if (existingPerson) {
-            if (window.confirm(`${existingPerson.name} is already added to phonebook. replace the old number with this one?`)) {
-                const updatedPerson = {
-                    name: existingPerson.name,
-                    number: newNumber
-                };
-                updatePerson(existingPerson.id, updatedPerson);
-            }
+            const updatedPerson = {
+                name: existingPerson.name,
+                number: newNumber
+            };
+            updatePerson(existingPerson.id, updatedPerson);
             return;
         }
         const newPersonObject = {
@@ -70,6 +68,7 @@ const App = () => {
                 setPersons(persons.concat(returnedPerson));
             })
             .catch(error => {
+                setError(true);
                 showNotification(error.response.data.error);
             });
         showNotification('Successfully added contact');
