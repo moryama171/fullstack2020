@@ -2,15 +2,15 @@ import React from 'react';
 
 
 const Input = ({ text, value, onChange }) => {
-    return (
-        <div>
-            {text}:
-            <input
-                value={value}
-                onChange={onChange}
-            />
-        </div>
-    );
-}
+  return (
+    <div>
+      {text}:
+      <input
+        value={value}
+        onChange={onChange}
+      />
+    </div>
+  );
+};
 
 export default Input;
