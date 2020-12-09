@@ -18,6 +18,7 @@ Here you can find the [application](https://rocky-thicket-20623.herokuapp.com/).
 - JS asynchronous behaviour
 - JS conditionals
 - JS `.filter()`
+- catch errors and show notifications
 - inline styling
 - connect front end to back end
 
