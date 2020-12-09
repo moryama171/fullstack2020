@@ -31,7 +31,7 @@ const App = () => {
                     person.id !== id ? person : returnedPerson));
             })
             .catch(error => {
-                setError(true)
+                setError(true);
                 showNotification(`${updatedPerson.name} was already deleted`);
             });
         setPersons(persons.filter(p => p.id !== id));
@@ -68,6 +68,9 @@ const App = () => {
             .create(newPersonObject)
             .then(returnedPerson => {
                 setPersons(persons.concat(returnedPerson));
+            })
+            .catch(error => {
+                showNotification(error.response.data.error);
             });
         showNotification('Successfully added contact');
         setNewName('');
@@ -104,7 +107,7 @@ const App = () => {
         setNotificationMessage(message);
         setTimeout(() => {
             setNotificationMessage(null);
-            setError(false)
+            setError(false);
         }, 5000);
     };
 
