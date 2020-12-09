@@ -29,15 +29,15 @@ const App = () => {
             .then(returnedPerson => {
                 setPersons(persons.map(person =>
                     person.id !== id ? person : returnedPerson));
+                setPersons(persons.filter(p => p.id !== id));
+                showNotification('Successfully updated contact');
+                setNewName('');
+                setNewNumber('');
             })
             .catch(error => {
                 setError(true);
                 showNotification(error.response.data.error);
             });
-        setPersons(persons.filter(p => p.id !== id));
-        showNotification('Successfully updated contact');
-        setNewName('');
-        setNewNumber('');
     };
 
     const addNewPerson = (event) => {
