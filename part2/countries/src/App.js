@@ -11,14 +11,14 @@ const App = () => {
     const [filterString, setFilterString] = useState('');
     const [countriesToShow, setCountriesToShow] = useState([]);
 
-    const hook = () => {
+    const countryInfo = () => {
         axios
             .get('https://restcountries.eu/rest/v2/all')
             .then(response => {
                 setCountries(response.data);
             });
     };
-    useEffect(hook, []);
+    useEffect(countryInfo, []);
 
     const handleFilter = (event) => {
         const filteredCountries = countries.filter(country => country.name.toLowerCase().includes(event.target.value.toLowerCase()));
@@ -35,7 +35,7 @@ const App = () => {
                 value={filterString}
                 onChange={handleFilter}
             />
-            <Display content={countriesToShow} />
+            <Display countries={countriesToShow}/>
         </div>
     );
 };
