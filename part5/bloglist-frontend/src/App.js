@@ -32,7 +32,7 @@ const App = () => {
 
   const loginForm = () => (
     <div>
-      <h2>Log in to BlogList</h2>
+      <h3>Please log in</h3>
       <form onSubmit={handleLogin}>
         <div>
           username
@@ -59,9 +59,9 @@ const App = () => {
 
   const blogsForm = () => (
     <div>
-      <h2>blogs</h2>
+      <h3>blogs</h3>
       <div>
-        <p>{user.username} is logged in</p>
+        <p>Welcome back {user.username}!</p>
       </div>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
@@ -72,7 +72,7 @@ const App = () => {
 
   return (
     <div>
-      Welcome to BlogList
+      <h1>BlogList</h1>
       {user === null
         ? loginForm()
         : blogsForm()
