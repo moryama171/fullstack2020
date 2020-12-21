@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Blog from './components/Blog';
+import Notification from './components/Notification'
 import blogService from './services/blogs';
 import loginService from './services/login';
 
@@ -13,6 +14,9 @@ const App = () => {
   const [author, setAuthor] = useState('');
   const [url, setUrl] = useState('');
 
+  const [notificationMessage, setNotificationMessage] = useState(null);
+  const [error, setError] = useState(false);
+
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs(blogs)
@@ -24,7 +28,7 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
-      blogService.setToken(user.token)
+      blogService.setToken(user.token);
     }
   }, []);
 
@@ -38,8 +42,10 @@ const App = () => {
         'loggedUser', JSON.stringify(user)
       );
       setUser(user);
+      showNotification('Successfully logged in')
     } catch (exception) {
-      console.log('Login failed, sorry');
+      setError(true)
+      showNotification('Invalid username or password')
     }
     setUsername('');
     setPassword('');
@@ -53,11 +59,12 @@ const App = () => {
         author,
         url
       });
+      showNotification('Successfully added new blog')
       blogService.setToken(user.token);
       setBlogs(blogs.concat(savedBlog));
     } catch (exception) {
-      console.log('Could not add blog, sorry');
-      console.log(exception)
+      setError(true)
+      showNotification('Could not add new blog')
     }
     setTitle('');
     setAuthor('');
@@ -68,6 +75,7 @@ const App = () => {
     event.preventDefault();
     window.localStorage.clear();
     setUser(null);
+    showNotification('Successfully logged out')
   };
 
   const loginForm = () => (
@@ -148,10 +156,18 @@ const App = () => {
     </div>
   );
 
+  const showNotification = (message) => {
+    setNotificationMessage(message);
+    setTimeout(() => {
+      setNotificationMessage(null);
+      setError(false);
+    }, 2000);
+  };
 
   return (
     <div>
       <h1>BlogList</h1>
+      <Notification message={notificationMessage} error={error} />
       {user === null
         ? loginForm()
         : blogsView()
