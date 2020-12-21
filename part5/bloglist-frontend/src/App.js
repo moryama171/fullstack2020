@@ -24,6 +24,7 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
+      blogService.setToken(user.token)
     }
   }, []);
 
@@ -52,9 +53,11 @@ const App = () => {
         author,
         url
       });
-      setBlogs(blogs.concat(savedBlog))
+      blogService.setToken(user.token);
+      setBlogs(blogs.concat(savedBlog));
     } catch (exception) {
       console.log('Could not add blog, sorry');
+      console.log(exception)
     }
     setTitle('');
     setAuthor('');
