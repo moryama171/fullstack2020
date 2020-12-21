@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Blog from './components/Blog';
-import BlogForm from './components/BlogForm'
 import blogService from './services/blogs';
 import loginService from './services/login';
 
@@ -9,6 +8,10 @@ const App = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
+
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [url, setUrl] = useState('');
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -39,6 +42,23 @@ const App = () => {
     }
     setUsername('');
     setPassword('');
+  };
+
+  const handleBlogForm = async (event) => {
+    event.preventDefault();
+    try {
+      const savedBlog = await blogService.create({
+        title,
+        author,
+        url
+      });
+      setBlogs(blogs.concat(savedBlog))
+    } catch (exception) {
+      console.log('Could not add blog, sorry');
+    }
+    setTitle('');
+    setAuthor('');
+    setUrl('');
   };
 
   const handleLogout = (event) => {
@@ -74,7 +94,7 @@ const App = () => {
     </div>
   );
 
-  const blogsForm = () => (
+  const blogsView = () => (
     <div>
       <h3>blogs</h3>
       <div>
@@ -85,7 +105,39 @@ const App = () => {
       </div>
       <div>
         <h4>Add a new blog</h4>
-        <BlogForm />
+        <form onSubmit={handleBlogForm}>
+          <div>
+            title:
+                    <input
+              type="text"
+              value={title}
+              name="Title"
+              onChange={({ target }) => setTitle(target.value)}
+            />
+          </div>
+          <div>
+            author:
+                    <input
+              type="text"
+              value={author}
+              name="Author"
+              onChange={({ target }) => setAuthor(target.value)}
+            />
+          </div>
+          <div>
+            url:
+                    <input
+              type="text"
+              value={url}
+              name="Url"
+              onChange={({ target }) => setUrl(target.value)}
+            />
+          </div>
+          <button type="submit">add blog</button>
+        </form>
+
+
+
       </div>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
@@ -99,7 +151,7 @@ const App = () => {
       <h1>BlogList</h1>
       {user === null
         ? loginForm()
-        : blogsForm()
+        : blogsView()
       }
     </div>
   );
