@@ -11,8 +11,7 @@ Check out the application. [COMING SOON]
 ## Learning focus
 
 - login interface and service
-- save token in local storage
-
+- handle token storage and usage
 
 ## Notes
 
