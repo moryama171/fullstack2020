@@ -15,14 +15,25 @@ const App = () => {
     );
   }, []);
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+    }
+  }, []);
+
   const handleLogin = async (event) => {
     event.preventDefault();
     console.log('loggin in', username);
     try {
-      const loggedUser = await loginService.login({
+      const user = await loginService.login({
         username, password
       });
-      setUser(loggedUser);
+      window.localStorage.setItem(
+        'loggedUser', JSON.stringify(user)
+      );
+      setUser(user);
       setUsername('');
       setPassword('');
     } catch (exception) {
