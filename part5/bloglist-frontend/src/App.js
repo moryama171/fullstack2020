@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Blog from './components/Blog';
+import BlogForm from './components/BlogForm'
 import blogService from './services/blogs';
 import loginService from './services/login';
 
@@ -81,6 +82,10 @@ const App = () => {
           Welcome back {user.username}!
           <button onClick={handleLogout}>logout</button>
         </p>
+      </div>
+      <div>
+        <h4>Add a new blog</h4>
+        <BlogForm />
       </div>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
