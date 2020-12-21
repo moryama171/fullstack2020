@@ -25,7 +25,6 @@ const App = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    console.log('loggin in', username);
     try {
       const user = await loginService.login({
         username, password
@@ -34,11 +33,17 @@ const App = () => {
         'loggedUser', JSON.stringify(user)
       );
       setUser(user);
-      setUsername('');
-      setPassword('');
     } catch (exception) {
       console.log('Login failed, sorry');
     }
+    setUsername('');
+    setPassword('');
+  };
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    window.localStorage.clear();
+    setUser(null);
   };
 
   const loginForm = () => (
@@ -72,7 +77,10 @@ const App = () => {
     <div>
       <h3>blogs</h3>
       <div>
-        <p>Welcome back {user.username}!</p>
+        <p>
+          Welcome back {user.username}!
+          <button onClick={handleLogout}>logout</button>
+        </p>
       </div>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
