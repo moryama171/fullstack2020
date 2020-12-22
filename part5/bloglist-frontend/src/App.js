@@ -29,6 +29,10 @@ const App = () => {
     }
   }, []);
 
+  const blogsSortedBylikes = [...blogs].sort((a, b) => {
+    return a.likes - b.likes;
+  }).reverse();
+
   const handleLogin = async (credentials) => {
     try {
       const user = await loginService.login(credentials);
@@ -94,7 +98,7 @@ const App = () => {
       </div>
       <h2>Blogs</h2>
       <div>
-        {blogs.map(blog =>
+        {blogsSortedBylikes.map(blog =>
           <Blog key={blog.id} blog={blog} updateBlog={updateBlog}/>
         )}
       </div>
