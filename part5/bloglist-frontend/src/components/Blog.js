@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 
-const Blog = ({ blog, updateBlog }) => {
+const Blog = ({ blog, removeBlog, updateBlog }) => {
+
   const [visible, setVisible] = useState(false);
+  const userJSON = window.localStorage.getItem('loggedUser');
+  const user = JSON.parse(userJSON);
+  const isUser= user.username === blog.user.username;
+
   // Styles
   const blogStyle = {
     paddingTop: 10,
@@ -12,6 +17,7 @@ const Blog = ({ blog, updateBlog }) => {
     marginBottom: 5
   };
   const showWhenVisible = { display: visible ? '' : 'none' };
+  const showWhenIsUser = { display: isUser ? '' : 'none' };
 
   const toggleVisibility = () => {
     setVisible(!visible);
@@ -30,6 +36,10 @@ const Blog = ({ blog, updateBlog }) => {
     );
   };
 
+  const remove = () => {
+    removeBlog(blog);
+  };
+
   return (
     <div style={blogStyle}>
       <div>
@@ -41,7 +51,8 @@ const Blog = ({ blog, updateBlog }) => {
               likes {blog.likes}
             <button onClick={addLike}>like</button>
           </p>
-          {blog.user ? blog.user.username : 'anon'}
+          <p>{blog.user.username}</p>
+          <button style={showWhenIsUser} onClick={remove}>remove</button>
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ const BlogForm = ({ handleBlogForm }) => {
     handleBlogForm({
       title,
       author,
-      url
+      url,
     });
     setTitle('');
     setAuthor('');

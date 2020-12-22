@@ -29,10 +29,6 @@ const App = () => {
     }
   }, []);
 
-  const blogsSortedBylikes = [...blogs].sort((a, b) => {
-    return a.likes - b.likes;
-  }).reverse();
-
   const handleLogin = async (credentials) => {
     try {
       const user = await loginService.login(credentials);
@@ -60,6 +56,19 @@ const App = () => {
     }
   };
 
+  const removeBlog = async (blog) => {
+    if (window.confirm(`Delete ${blog.title}?`)) {
+      try {
+        await blogService.drop(blog.id);
+        setBlogs(blogs.filter(b => b.id !== blog.id));
+        blogService.setToken(user.token);
+      } catch (exception) {
+        setError(true);
+        showNotification('Could not remove blog');
+      }
+    }
+  };
+
   const updateBlog = async (id, blogObject) => {
     try {
       const updatedBlog = await blogService.update(id, blogObject);
@@ -82,6 +91,11 @@ const App = () => {
     <LoginForm handleLogin={handleLogin}/>
   );
 
+  // TODO: This should go right before calling Blog component (line 115)
+  const blogsSortedBylikes = [...blogs].sort((a, b) => {
+    return a.likes - b.likes;
+  }).reverse();
+
   const blogFormRef = useRef();
   const blogsView = () => (
     <div>
@@ -99,7 +113,12 @@ const App = () => {
       <h2>Blogs</h2>
       <div>
         {blogsSortedBylikes.map(blog =>
-          <Blog key={blog.id} blog={blog} updateBlog={updateBlog}/>
+          <Blog
+            key={blog.id}
+            blog={blog}
+            removeBlog={removeBlog}
+            updateBlog={updateBlog}
+          />
         )}
       </div>
     </div>
