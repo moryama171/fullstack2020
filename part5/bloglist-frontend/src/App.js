@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Blog from './components/Blog';
 import BlogForm from './components/BlogForm';
 import LoginForm from './components/Login';
 import Notification from './components/Notification';
+import Togglable from './components/Togglable';
 import blogService from './services/blogs';
 import loginService from './services/login';
 
@@ -45,6 +46,7 @@ const App = () => {
   const handleBlogForm = async (blogObject) => {
     try {
       const savedBlog = await blogService.create(blogObject);
+      blogFormRef.current.toggleVisibility();
       showNotification('Successfully added new blog');
       blogService.setToken(user.token);
       setBlogs(blogs.concat(savedBlog));
@@ -65,6 +67,7 @@ const App = () => {
     <LoginForm handleLogin={handleLogin}/>
   );
 
+  const blogFormRef = useRef();
   const blogsView = () => (
     <div>
       <h3>blogs</h3>
@@ -74,7 +77,9 @@ const App = () => {
           <button onClick={handleLogout}>logout</button>
         </p>
       </div>
-      <BlogForm handleBlogForm={handleBlogForm}/>
+      <Togglable buttonLabel='add blog' ref={blogFormRef}>
+        <BlogForm handleBlogForm={handleBlogForm}/>
+      </Togglable>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
