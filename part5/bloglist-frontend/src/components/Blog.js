@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 const Blog = ({ blog, removeBlog, updateBlog }) => {
 
   const [visible, setVisible] = useState(false);
-  const userJSON = window.localStorage.getItem('loggedUser');
-  const user = JSON.parse(userJSON);
+  const user = JSON.parse(window.localStorage.getItem('loggedUser'));
   const isUser= user.username === blog.user.username;
 
   // Styles
@@ -51,7 +50,7 @@ const Blog = ({ blog, removeBlog, updateBlog }) => {
               likes {blog.likes}
             <button onClick={addLike}>like</button>
           </p>
-          <p>{blog.user.username}</p>
+          <p>user: {user.username}</p>
           <button style={showWhenIsUser} onClick={remove}>remove</button>
         </div>
       </div>

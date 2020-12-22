@@ -4,7 +4,7 @@ const BlogForm = ({ handleBlogForm }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [url, setUrl] = useState('');
-
+  
   const addBlog = (event) => {
     event.preventDefault();
     handleBlogForm({

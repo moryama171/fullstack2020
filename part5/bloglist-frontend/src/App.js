@@ -15,12 +15,6 @@ const App = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs(blogs)
-    );
-  }, []);
-
-  useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
@@ -29,6 +23,18 @@ const App = () => {
     }
   }, []);
 
+  useEffect(() => {
+    blogService.getAll().then(blogs =>
+      setBlogs(blogs)
+    );
+  }, []);
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    window.localStorage.clear();
+    setUser(null);
+  };
+
   const handleLogin = async (credentials) => {
     try {
       const user = await loginService.login(credentials);
@@ -36,6 +42,7 @@ const App = () => {
         'loggedUser', JSON.stringify(user)
       );
       setUser(user);
+      blogService.setToken(user.token, user.username);
       showNotification('Successfully logged in');
     } catch (exception) {
       setError(true);
@@ -43,13 +50,12 @@ const App = () => {
     }
   };
 
-  const handleBlogForm = async (blogObject) => {
+  const addBlog = async (blogObject) => {
     try {
-      const savedBlog = await blogService.create(blogObject);
       blogFormRef.current.toggleVisibility();
-      showNotification('Successfully added new blog');
-      blogService.setToken(user.token);
+      const savedBlog = await blogService.create(blogObject);
       setBlogs(blogs.concat(savedBlog));
+      showNotification('Successfully added new blog');
     } catch (exception) {
       setError(true);
       showNotification('Could not add new blog');
@@ -80,18 +86,10 @@ const App = () => {
     }
   };
 
-  const handleLogout = (event) => {
-    event.preventDefault();
-    window.localStorage.clear();
-    setUser(null);
-    showNotification('Successfully logged out');
-  };
-
   const loginForm = () => (
     <LoginForm handleLogin={handleLogin}/>
   );
 
-  // TODO: This should go right before calling Blog component (line 115)
   const blogsSortedBylikes = [...blogs].sort((a, b) => {
     return a.likes - b.likes;
   }).reverse();
@@ -107,7 +105,7 @@ const App = () => {
       </div>
       <div>
         <Togglable buttonLabel='add blog' ref={blogFormRef}>
-          <BlogForm handleBlogForm={handleBlogForm}/>
+          <BlogForm handleBlogForm={addBlog}/>
         </Togglable>
       </div>
       <h2>Blogs</h2>
