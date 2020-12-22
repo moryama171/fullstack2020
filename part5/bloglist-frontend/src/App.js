@@ -70,19 +70,23 @@ const App = () => {
   const blogFormRef = useRef();
   const blogsView = () => (
     <div>
-      <h3>blogs</h3>
       <div>
         <p>
           Welcome back {user.username}!
           <button onClick={handleLogout}>logout</button>
         </p>
       </div>
-      <Togglable buttonLabel='add blog' ref={blogFormRef}>
-        <BlogForm handleBlogForm={handleBlogForm}/>
-      </Togglable>
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
+      <div>
+        <Togglable buttonLabel='add blog' ref={blogFormRef}>
+          <BlogForm handleBlogForm={handleBlogForm}/>
+        </Togglable>
+      </div>
+      <h2>Blogs</h2>
+      <div>
+        {blogs.map(blog =>
+          <Blog key={blog.id} blog={blog} />
+        )}
+      </div>
     </div>
   );
 

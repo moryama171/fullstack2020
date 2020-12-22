@@ -19,34 +19,40 @@ const BlogForm = ({ handleBlogForm }) => {
 
   return (
     <div>
-      <h4>Add a new blog</h4>
+      <h2>Add a new blog</h2>
       <form onSubmit={addBlog}>
         <div>
-        title:
-          <input
-            type="text"
-            value={title}
-            name="Title"
-            onChange={({ target }) => setTitle(target.value)}
-          />
+          <p>
+            title:
+            <input
+              type="text"
+              value={title}
+              name="Title"
+              onChange={({ target }) => setTitle(target.value)}
+            />
+          </p>
         </div>
         <div>
+          <p>
         author:
-          <input
-            type="text"
-            value={author}
-            name="Author"
-            onChange={({ target }) => setAuthor(target.value)}
-          />
+            <input
+              type="text"
+              value={author}
+              name="Author"
+              onChange={({ target }) => setAuthor(target.value)}
+            />
+          </p>
         </div>
         <div>
+          <p>
         url:
-          <input
-            type="text"
-            value={url}
-            name="Url"
-            onChange={({ target }) => setUrl(target.value)}
-          />
+            <input
+              type="text"
+              value={url}
+              name="Url"
+              onChange={({ target }) => setUrl(target.value)}
+            />
+          </p>
         </div>
         <button type="submit">add blog</button>
       </form>
