@@ -14,6 +14,8 @@ Check out the application. [COMING SOON]
 - handle token storage and usage
 - lifting the state up
 - implement 'likes' functionality
+- mangage children components
+- use component reference
 
 ## Notes
 
