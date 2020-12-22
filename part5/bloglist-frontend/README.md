@@ -40,3 +40,4 @@ Finally open [http://localhost:3001](http://localhost:3001) to view the app in t
 
 
 ## Improvements and beyond
+- **FIX:** right after login and before rerendering, `blog.user.username` is `undefined`

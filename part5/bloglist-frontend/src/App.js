@@ -15,6 +15,12 @@ const App = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    blogService.getAll().then(blogs =>
+      setBlogs(blogs)
+    );
+  }, []);
+
+  useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
@@ -23,17 +29,43 @@ const App = () => {
     }
   }, []);
 
-  useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs(blogs)
-    );
-  }, []);
-
   const handleLogout = (event) => {
     event.preventDefault();
     window.localStorage.clear();
     setUser(null);
   };
+
+  const blogsSortedBylikes = [...blogs].sort((a, b) => {
+    return a.likes - b.likes;
+  }).reverse();
+
+  const blogFormRef = useRef();
+  const blogsView = () => (
+    <div>
+      <div>
+        <p>
+          Welcome back {user.username}!
+          <button onClick={handleLogout}>logout</button>
+        </p>
+      </div>
+      <div>
+        <Togglable buttonLabel='add blog' ref={blogFormRef}>
+          <BlogForm handleBlogForm={addBlog}/>
+        </Togglable>
+      </div>
+      <h2>Blogs</h2>
+      <div>
+        {blogsSortedBylikes.map(blog =>
+          <Blog
+            key={blog.id}
+            blog={blog}
+            removeBlog={removeBlog}
+            updateBlog={updateBlog}
+          />
+        )}
+      </div>
+    </div>
+  );
 
   const handleLogin = async (credentials) => {
     try {
@@ -88,38 +120,6 @@ const App = () => {
 
   const loginForm = () => (
     <LoginForm handleLogin={handleLogin}/>
-  );
-
-  const blogsSortedBylikes = [...blogs].sort((a, b) => {
-    return a.likes - b.likes;
-  }).reverse();
-
-  const blogFormRef = useRef();
-  const blogsView = () => (
-    <div>
-      <div>
-        <p>
-          Welcome back {user.username}!
-          <button onClick={handleLogout}>logout</button>
-        </p>
-      </div>
-      <div>
-        <Togglable buttonLabel='add blog' ref={blogFormRef}>
-          <BlogForm handleBlogForm={addBlog}/>
-        </Togglable>
-      </div>
-      <h2>Blogs</h2>
-      <div>
-        {blogsSortedBylikes.map(blog =>
-          <Blog
-            key={blog.id}
-            blog={blog}
-            removeBlog={removeBlog}
-            updateBlog={updateBlog}
-          />
-        )}
-      </div>
-    </div>
   );
 
   const showNotification = (message) => {
