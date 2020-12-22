@@ -12,8 +12,12 @@ Check out the application. [COMING SOON]
 
 - login interface and service
 - handle token storage and usage
+- lifting the state up
 
 ## Notes
+
+### Lifting state up
+- from React [documentation](https://reactjs.org/docs/lifting-state-up.html): *Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.*
 
 ## Stack
 
