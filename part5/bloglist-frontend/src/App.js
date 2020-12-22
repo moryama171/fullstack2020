@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Blog from './components/Blog';
-import Notification from './components/Notification'
+import Notification from './components/Notification';
 import blogService from './services/blogs';
 import loginService from './services/login';
 
@@ -42,10 +42,10 @@ const App = () => {
         'loggedUser', JSON.stringify(user)
       );
       setUser(user);
-      showNotification('Successfully logged in')
+      showNotification('Successfully logged in');
     } catch (exception) {
-      setError(true)
-      showNotification('Invalid username or password')
+      setError(true);
+      showNotification('Invalid username or password');
     }
     setUsername('');
     setPassword('');
@@ -59,12 +59,12 @@ const App = () => {
         author,
         url
       });
-      showNotification('Successfully added new blog')
+      showNotification('Successfully added new blog');
       blogService.setToken(user.token);
       setBlogs(blogs.concat(savedBlog));
     } catch (exception) {
-      setError(true)
-      showNotification('Could not add new blog')
+      setError(true);
+      showNotification('Could not add new blog');
     }
     setTitle('');
     setAuthor('');
@@ -75,7 +75,7 @@ const App = () => {
     event.preventDefault();
     window.localStorage.clear();
     setUser(null);
-    showNotification('Successfully logged out')
+    showNotification('Successfully logged out');
   };
 
   const loginForm = () => (
@@ -84,7 +84,7 @@ const App = () => {
       <form onSubmit={handleLogin}>
         <div>
           username
-        <input
+          <input
             type="text"
             value={username}
             name="Username"
@@ -93,7 +93,7 @@ const App = () => {
         </div>
         <div>
           password
-        <input
+          <input
             type="password"
             value={password}
             name="Password"
@@ -119,7 +119,7 @@ const App = () => {
         <form onSubmit={handleBlogForm}>
           <div>
             title:
-                    <input
+            <input
               type="text"
               value={title}
               name="Title"
@@ -128,7 +128,7 @@ const App = () => {
           </div>
           <div>
             author:
-                    <input
+            <input
               type="text"
               value={author}
               name="Author"
@@ -137,7 +137,7 @@ const App = () => {
           </div>
           <div>
             url:
-                    <input
+            <input
               type="text"
               value={url}
               name="Url"
