@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Blog from './components/Blog';
+import LoginForm from './components/Login';
 import Notification from './components/Notification';
 import blogService from './services/blogs';
 import loginService from './services/login';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
 
   const [title, setTitle] = useState('');
@@ -32,12 +31,9 @@ const App = () => {
     }
   }, []);
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
+  const handleLogin = async (credentials) => {
     try {
-      const user = await loginService.login({
-        username, password
-      });
+      const user = await loginService.login(credentials);
       window.localStorage.setItem(
         'loggedUser', JSON.stringify(user)
       );
@@ -47,8 +43,6 @@ const App = () => {
       setError(true);
       showNotification('Invalid username or password');
     }
-    setUsername('');
-    setPassword('');
   };
 
   const handleBlogForm = async (event) => {
@@ -79,30 +73,7 @@ const App = () => {
   };
 
   const loginForm = () => (
-    <div>
-      <h3>Please log in</h3>
-      <form onSubmit={handleLogin}>
-        <div>
-          username
-          <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
-        </div>
-        <div>
-          password
-          <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <button type="submit">login</button>
-      </form>
-    </div>
+    <LoginForm handleLogin={handleLogin}/>
   );
 
   const blogsView = () => (
