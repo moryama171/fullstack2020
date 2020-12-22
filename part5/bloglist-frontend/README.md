@@ -13,6 +13,7 @@ Check out the application. [COMING SOON]
 - login interface and service
 - handle token storage and usage
 - lifting the state up
+- implement 'likes' functionality
 
 ## Notes
 
