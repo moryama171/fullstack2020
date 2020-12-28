@@ -40,6 +40,10 @@ const App = () => {
   }).reverse();
 
   const blogFormRef = useRef();
+  const isUser = (blog, user) => {
+    return user.username === blog.user.username
+  }
+
   const blogsView = () => (
     <div>
       <div>
@@ -61,6 +65,7 @@ const App = () => {
             blog={blog}
             removeBlog={removeBlog}
             updateBlog={updateBlog}
+            isUser={isUser(blog, user)}
           />
         )}
       </div>

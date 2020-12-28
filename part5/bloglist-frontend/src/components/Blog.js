@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const Blog = ({ blog, removeBlog, updateBlog }) => {
+const Blog = ({ blog, removeBlog, updateBlog, isUser }) => {
 
   const [visible, setVisible] = useState(false);
-  const user = JSON.parse(window.localStorage.getItem('loggedUser'));
-  const isUser= user.username === blog.user.username;
 
   // Styles
   const blogStyle = {
@@ -62,7 +60,8 @@ const Blog = ({ blog, removeBlog, updateBlog }) => {
 Blog.propTypes = {
   blog: PropTypes.object.isRequired,
   removeBlog: PropTypes.func.isRequired,
-  updateBlog: PropTypes.func.isRequired
+  updateBlog: PropTypes.func.isRequired,
+  isUser: PropTypes.bool
 };
 
 export default Blog;
