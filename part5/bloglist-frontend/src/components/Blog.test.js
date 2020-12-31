@@ -38,7 +38,7 @@ describe('<Blog />', () => {
   });
 
   test('after clicking the button once, blog url and likes are shown', () => {
-    const button = component.container.querySelector('#showButton');
+    const button = component.container.querySelector('#show-button');
     fireEvent.click(button);
 
     const urlAndLikes = component.container.querySelector('#blogDetails');
@@ -47,9 +47,9 @@ describe('<Blog />', () => {
 
   test('when "like" button is clicked twice, its event handler is called twice', () => {
 
-    const likeButton = component.container.querySelector('#likeButton');
-    fireEvent.click(likeButton);
-    fireEvent.click(likeButton);
+    const like-button = component.container.querySelector('#like-button');
+    fireEvent.click(like-button);
+    fireEvent.click(like-button);
 
     expect(mockUpdateHandler.mock.calls).toHaveLength(2);
   });
