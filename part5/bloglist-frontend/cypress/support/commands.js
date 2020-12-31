@@ -28,7 +28,7 @@
 const baseUrl = 'http://localhost:3000';
 
 Cypress.Commands.add('login', ({ username, password }) => {
-    
+    localStorage.clear()
     cy.request('POST', `${baseUrl}/api/login`, {
         username,
         password
@@ -36,10 +36,10 @@ Cypress.Commands.add('login', ({ username, password }) => {
         localStorage.setItem('loggedUser', JSON.stringify(response.body));
         cy.visit(baseUrl);
     });
-})
+});
 
-Cypress.Commands.add('createBlog', ({title, author, url}) => {
-    
+Cypress.Commands.add('createBlog', ({ title, author, url }) => {
+
     cy.request({
         method: 'POST',
         url: `${baseUrl}/api/blogs`,
@@ -53,4 +53,4 @@ Cypress.Commands.add('createBlog', ({title, author, url}) => {
         }
     });
     cy.visit(baseUrl);
-})
+});

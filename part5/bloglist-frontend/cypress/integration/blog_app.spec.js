@@ -10,6 +10,12 @@ describe('Blog app', function () {
             password: 'bubba'
         };
         cy.request('POST', `${baseUrl}/api/users`, user);
+        const another_user = {
+            name: 'Cuccola de Cuccis',
+            username: 'cucca',
+            password: 'cucca'
+        };
+        cy.request('POST', `${baseUrl}/api/users`, another_user);
 
         cy.visit(baseUrl);
     });
@@ -60,21 +66,41 @@ describe('Blog app', function () {
             cy.contains('new blogger');
         });
 
-        describe('and a blog already exists', function () {
+        describe('some blogs already exist', function () {
             beforeEach(function () {
-                // Create a blog
+                // Create user's blog
+                cy.login({ username: 'bubba', password: 'bubba' });
                 cy.createBlog({
                     title: 'some blog',
                     author: 'some blogger',
                     url: 'some url'
-                })
+                });
             });
+
             it('lets user like a blog', function () {
                 cy.contains('some blog')
                     .get('#show-button').click()
                     .get('#like-button').click();
 
                 cy.contains('likes 1');
+            });
+
+            it('lets user delete their blog', function () {
+                cy.get('#blog')
+                    .get('#show-button').click()
+                    .get('#remove-button').click();
+                
+                cy.should('not.contain', 'some blog');
+            });
+
+            it('only lets user delete their own blog', function () {
+                cy.login({ username: 'cucca', password: 'cucca' });
+                cy.get('#blog')
+                    .get('#show-button').click();
+
+                cy.get('#blog-details')
+                  .get('#remove-button')
+                  .should('not.be.visible');
             });
         });
     });

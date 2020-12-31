@@ -95,7 +95,7 @@ const App = () => {
       showNotification('Successfully added new blog');
     } catch (exception) {
       setError(true);
-      showNotification('Could not add new blog');
+      showNotification('Could not add new blog, sorry');
     }
   };
 
@@ -107,7 +107,7 @@ const App = () => {
         blogService.setToken(user.token);
       } catch (exception) {
         setError(true);
-        showNotification('Could not remove blog');
+        showNotification('Could not remove blog, sorry');
       }
     }
   };

@@ -31,7 +31,7 @@ describe('<Blog />', () => {
 
   test('by default renders blog title and author, but not url or number if likes', () => {
     const titleAndAuthor = component.container.querySelector('#blogHeadline');
-    const urlAndLikes = component.container.querySelector('#blogDetails');
+    const urlAndLikes = component.container.querySelector('#blog-details');
 
     expect(titleAndAuthor).toBeVisible();
     expect(urlAndLikes).not.toBeVisible();
@@ -41,7 +41,7 @@ describe('<Blog />', () => {
     const button = component.container.querySelector('#show-button');
     fireEvent.click(button);
 
-    const urlAndLikes = component.container.querySelector('#blogDetails');
+    const urlAndLikes = component.container.querySelector('#blog-details');
     expect(urlAndLikes).toBeVisible();
   });
 
