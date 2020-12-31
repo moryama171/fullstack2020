@@ -46,14 +46,7 @@ describe('Blog app', function () {
 
     describe('when logged in', function () {
         beforeEach(function () {
-            // Create a user
-            cy.request('POST', `${baseUrl}/api/login`, {
-                username: 'bubba',
-                password: 'bubba'
-            }).then(response => {
-                localStorage.setItem('loggedUser', JSON.stringify(response.body));
-                cy.visit(baseUrl);
-            });
+            cy.login({ username: 'bubba', password: 'bubba' });
         });
 
         it('lets user create a blog', function () {
@@ -67,30 +60,22 @@ describe('Blog app', function () {
             cy.contains('new blogger');
         });
 
-        describe.only('and a blog already exists', function () {
+        describe('and a blog already exists', function () {
             beforeEach(function () {
                 // Create a blog
-                cy.request({
-                    method: 'POST',
-                    url: `${baseUrl}/api/blogs`,
-                    body: {
-                        title: 'some blog',
-                        author: 'some blogger',
-                        url: 'some blog url',
-                    },
-                    headers: {
-                        'Authorization': `bearer ${JSON.parse(localStorage.getItem('loggedUser')).token}`
-                    }
+                cy.createBlog({
+                    title: 'some blog',
+                    author: 'some blogger',
+                    url: 'some url'
                 })
-                cy.visit(baseUrl)
             });
-            it('lets user like a blog', function() {
+            it('lets user like a blog', function () {
                 cy.contains('some blog')
-                  .get('#show-button').click()
-                  .get('#like-button').click()
+                    .get('#show-button').click()
+                    .get('#like-button').click();
 
-                cy.contains('likes 1')
-            })
+                cy.contains('likes 1');
+            });
         });
     });
 })
