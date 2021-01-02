@@ -66,7 +66,7 @@ describe('Blog app', function () {
             cy.contains('new blogger');
         });
 
-        describe('some blogs already exist', function () {
+        describe('and one blog already exists', function () {
             beforeEach(function () {
                 // Create user's blog
                 cy.login({ username: 'bubba', password: 'bubba' });
@@ -78,29 +78,56 @@ describe('Blog app', function () {
             });
 
             it('lets user like a blog', function () {
-                cy.contains('some blog')
-                    .get('#show-button').click()
-                    .get('#like-button').click();
+                cy.get('.blog')
+                    .get('.show-button').click()
+                    .get('.like-button').click();
 
                 cy.contains('likes 1');
             });
 
             it('lets user delete their blog', function () {
-                cy.get('#blog')
-                    .get('#show-button').click()
-                    .get('#remove-button').click();
-                
+                cy.get('.blog')
+                    .get('.show-button').click()
+                    .get('.remove-button').click();
+
                 cy.should('not.contain', 'some blog');
             });
 
             it('only lets user delete their own blog', function () {
                 cy.login({ username: 'cucca', password: 'cucca' });
-                cy.get('#blog')
-                    .get('#show-button').click();
+                cy.get('.blog')
+                    .get('.show-button').click();
 
-                cy.get('#blog-details')
-                  .get('#remove-button')
-                  .should('not.be.visible');
+                cy.get('.blog-details')
+                    .get('.remove-button')
+                    .should('not.be.visible');
+            });
+        });
+
+        describe.only('and some blogs already exist', function () {
+            beforeEach(function () {
+                cy.createBlog({
+                    title: 'some liked blog',
+                    author: 'some liked author',
+                    url: 'some liked url'
+                });
+                cy.createBlog({
+                    title: 'some blog',
+                    author: 'some blogger',
+                    url: 'some url'
+                });
+            });
+
+            it.only('shows the blogs ordered by likes', function () {
+                cy.get('.blog-likes:first').contains('likes 0');
+                cy.get('.blog-likes:last').contains('likes 0');
+
+                cy.get('.blog:last')
+                    .get('.show-button:last').click()
+                    .get('.like-button:last').click();
+
+                cy.get('.blog-likes:first').contains('likes 1');
+                cy.get('.blog-likes:last').contains('likes 0');
             });
         });
     });

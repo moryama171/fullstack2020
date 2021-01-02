@@ -31,23 +31,23 @@ describe('<Blog />', () => {
 
   test('by default renders blog title and author, but not url or number if likes', () => {
     const titleAndAuthor = component.container.querySelector('#blogHeadline');
-    const urlAndLikes = component.container.querySelector('#blog-details');
+    const urlAndLikes = component.container.querySelector('.blog-details');
 
     expect(titleAndAuthor).toBeVisible();
     expect(urlAndLikes).not.toBeVisible();
   });
 
   test('after clicking the button once, blog url and likes are shown', () => {
-    const button = component.container.querySelector('#show-button');
+    const button = component.container.querySelector('.show-button');
     fireEvent.click(button);
 
-    const urlAndLikes = component.container.querySelector('#blog-details');
+    const urlAndLikes = component.container.querySelector('.blog-details');
     expect(urlAndLikes).toBeVisible();
   });
 
   test('when "like" button is clicked twice, its event handler is called twice', () => {
 
-    const like-button = component.container.querySelector('#like-button');
+    const like-button = component.container.querySelector('.like-button');
     fireEvent.click(like-button);
     fireEvent.click(like-button);
 
