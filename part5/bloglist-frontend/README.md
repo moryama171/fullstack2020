@@ -16,6 +16,8 @@ Check out the application. [COMING SOON]
 - implement 'likes' functionality
 - mangage children components
 - use component reference
+- use `Jest` for unit-testing of components
+- use `Cypress` for end-to-end testing
 
 ## Notes
 

@@ -104,7 +104,7 @@ describe('Blog app', function () {
             });
         });
 
-        describe.only('and some blogs already exist', function () {
+        describe('and some blogs already exist', function () {
             beforeEach(function () {
                 cy.createBlog({
                     title: 'some liked blog',
@@ -118,7 +118,7 @@ describe('Blog app', function () {
                 });
             });
 
-            it.only('shows the blogs ordered by likes', function () {
+            it('shows the blogs ordered by likes', function () {
                 cy.get('.blog-likes:first').contains('likes 0');
                 cy.get('.blog-likes:last').contains('likes 0');
 
