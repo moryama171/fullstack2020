@@ -29,7 +29,7 @@ describe('<Blog />', () => {
     );
   });
 
-  test('by default renders blog title and author, but not url or number if likes', () => {
+  test('by default renders blog title and author, but not url or number of likes', () => {
     const titleAndAuthor = component.container.querySelector('#blogHeadline');
     const urlAndLikes = component.container.querySelector('.blog-details');
 
@@ -47,11 +47,10 @@ describe('<Blog />', () => {
 
   test('when "like" button is clicked twice, its event handler is called twice', () => {
 
-    const like-button = component.container.querySelector('.like-button');
-    fireEvent.click(like-button);
-    fireEvent.click(like-button);
+    const likeButton = component.container.querySelector('.like-button');
+    fireEvent.click(likeButton);
+    fireEvent.click(likeButton);
 
     expect(mockUpdateHandler.mock.calls).toHaveLength(2);
   });
 });
-
