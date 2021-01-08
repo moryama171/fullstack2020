@@ -10,6 +10,7 @@ These are my submission for the Full Stack Open [Course](https://fullstackopen.c
 - Uncontrolled forms
 - Redux store to manage app state
 - Access dispatch and state with `react-redux`
+- Manage combined reducers
 
 ## Notes
 
