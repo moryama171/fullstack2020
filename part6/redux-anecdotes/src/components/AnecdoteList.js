@@ -20,7 +20,12 @@ const AnecdoteList = () => {
   }).reverse();
 
   const vote = (anecdote) => {
-    dispatch(voteAnecdote(anecdote.id));
+    const anecdoteToChange = anecdotes.find(a => a.id === anecdote.id);
+      const votedAnecdote = {
+        ...anecdoteToChange,
+        votes: anecdoteToChange.votes + 1
+      };
+    dispatch(voteAnecdote(anecdote.id, votedAnecdote));
     dispatch(setNotification(`YOU VOTED FOR ${anecdote.content}`));
     setTimeout(() => {
       dispatch(removeNotification());
