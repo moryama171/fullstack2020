@@ -11,10 +11,14 @@ export const initializeAnecdotes = () => {
   };
 };
 
-export const createAnecdote = (data) => {
-  return {
-    type: 'NEW_ANECDOTE',
-    data
+export const createAnecdote = (newAnecdote) => {
+  return async (dispatch) => {
+    const anecdote = await anecdotesService
+      .createAnecdote(newAnecdote);
+    dispatch({
+      type: 'NEW_ANECDOTE',
+      data: anecdote
+    })
   };
 };
 
