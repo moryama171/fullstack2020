@@ -22,14 +22,15 @@ export const createAnecdote = (newAnecdote) => {
   };
 };
 
-export const voteAnecdote = (anecdoteId, updatedAnecdote) => {
+export const vote = (anecdote) => {
   return async (dispatch) => {
+    const updatedAnecdote = {...anecdote, votes: anecdote.votes + 1}
     await anecdotesService
-      .updateAnecdote(anecdoteId, updatedAnecdote);
+      .updateAnecdote(updatedAnecdote.id, updatedAnecdote);
     dispatch({
       type: 'ADD_VOTE',
       data: {
-        id: anecdoteId,
+        id: updatedAnecdote.id,
         anecdote: updatedAnecdote
       }
     });

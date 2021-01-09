@@ -1,32 +1,27 @@
-const initialState = ''
+const initialState = null;
 
 const notificationReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SHOW':
-      return action.data.message
+      return action.message;
     case 'HIDE':
-      return initialState
+      return null;
     default:
-      return state
+      return state;
   }
 };
 
-export const setNotification = (message) => {
+export const showNotification = (message) => {
   return {
     type: 'SHOW',
-    data: {
-      message
-    }
+    message
   };
 };
 
-export const removeNotification = () => {
- return {
-      type: 'HIDE',
-      data: {
-        message: ''
-      }
-    }
-}
+export const hideNotification = () => {
+  return {
+    type: 'HIDE',
+  };
+};
 
 export default notificationReducer;
