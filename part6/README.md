@@ -11,6 +11,8 @@ These are my submission for the Full Stack Open [Course](https://fullstackopen.c
 - Redux store to manage app state
 - Access dispatch and state with `react-redux`
 - Manage combined reducers
+- Communication between Redux and server
+- Asynchronous actions with `redux-thunk`
 
 ## Notes
 
