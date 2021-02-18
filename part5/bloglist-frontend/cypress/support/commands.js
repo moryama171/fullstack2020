@@ -54,6 +54,3 @@ Cypress.Commands.add('createBlog', ({ title, author, url }) => {
     });
     cy.visit(baseUrl);
 });
-
-
-// Cypress.Commands.add('addLikes', ())
