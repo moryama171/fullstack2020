@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useField } from '../redux/hooks';
+import { Button, Form, Header } from 'semantic-ui-react';
 
 
 const BlogForm = ({ handleBlogForm }) => {
@@ -22,40 +23,44 @@ const BlogForm = ({ handleBlogForm }) => {
 
   return (
     <div>
-      <h2>Add a new blog</h2>
-      <form onSubmit={addBlog}>
-        <div>
-          <p>
-            title:
+      <Header>Add a new blog</Header>
+      <Form onSubmit={addBlog}>
+        <Form.Group>
+          <Form.Field required>
+            <label>title:</label>
             <input
               id='blog-title-input'
               name='Title'
               {...title}
             />
-          </p>
-        </div>
-        <div>
-          <p>
-            author:
+          </Form.Field>
+        </Form.Group>
+        <Form.Group>
+          <Form.Field required>
+            <label>author:</label>
             <input
               id='blog-author-input'
               name='Author'
               {...author}
             />
-          </p>
-        </div>
-        <div>
-          <p>
-            url:
+          </Form.Field>
+          <Form.Field required>
+            <label>url:</label>
             <input
               id='blog-url-input'
               name='Url'
               {...url}
             />
-          </p>
-        </div>
-        <button id='add-blog-button' type='submit'>add blog</button>
-      </form>
+          </Form.Field>
+        </Form.Group>
+        <Button
+          color='pink'
+          id='add-blog-button'
+          type='submit'
+        >
+          add blog
+          </Button>
+      </Form>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { useField } from '../redux/hooks';
 import { useDispatch } from 'react-redux';
 import { postComment } from '../redux/reducers/blogReducer';
 import { nanoid } from 'nanoid';
+import { Button } from 'semantic-ui-react';
 
 
 const Comments = ({ blog }) => {
@@ -24,7 +25,7 @@ const Comments = ({ blog }) => {
       <h2>Comments</h2>
       <form onSubmit={addComment}>
         <input {...commentInput} />
-        <button type='submit'>add comment</button>
+        <Button color='pink' type='submit' style={{ 'marginLeft': '1.2em' }}>add comment</Button>
       </form>
 
       {

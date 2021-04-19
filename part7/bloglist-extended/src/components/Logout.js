@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { logoutUser } from '../redux/reducers/userReducer';
+import { Button } from 'semantic-ui-react';
 
 
 const Logout = () => {
@@ -11,13 +12,19 @@ const Logout = () => {
   const handleLogout = (event) => {
     event.preventDefault();
     dispatch(logoutUser());
-    history.push('/')
+    history.push('/');
   };
 
   return (
     <div>
       <p>
-        <button onClick={handleLogout}>logout</button>
+        <Button
+          color='blue'
+          size='mini'
+          onClick={handleLogout}
+        >
+          logout
+          </Button>
       </p>
     </div>
   );

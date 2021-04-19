@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNotification } from '../redux/hooks';
 import { loginUser } from '../redux/reducers/userReducer';
+import { Button, Form } from 'semantic-ui-react';
 
 
 const LoginForm = () => {
@@ -25,9 +26,9 @@ const LoginForm = () => {
   return (
     <div>
       <h2>Log in</h2>
-      <form onSubmit={logUserIn}>
-        <div>
-          username
+      <Form onSubmit={logUserIn}>
+        <Form.Field required>
+            <label>username:</label>
           <input
             id="username"
             type="text"
@@ -35,9 +36,9 @@ const LoginForm = () => {
             name="Username"
             onChange={({ target }) => setUsername(target.value)}
           />
-        </div>
-        <div>
-          password
+        </Form.Field>
+        <Form.Field required>
+        <label>password:</label>
           <input
             id="password"
             type="password"
@@ -45,9 +46,16 @@ const LoginForm = () => {
             name="Password"
             onChange={({ target }) => setPassword(target.value)}
           />
-        </div>
-        <button id="login-button" type="submit">login</button>
-      </form>
+        </Form.Field>
+        <Button
+          color='brown'
+          size='large'
+          id="login-button"
+          type="submit"
+        >
+          login
+        </Button>
+      </Form>
     </div>
   );
 };

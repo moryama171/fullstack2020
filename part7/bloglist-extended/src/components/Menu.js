@@ -1,21 +1,22 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import Logout from './Logout';
+import { Menu as SuiMenu } from 'semantic-ui-react';
 
 
 const Menu = () => {
-  const MenuLinkStyle = {
-    paddingRight: '1em',
-    backgroundColor: 'pink'
-  };
 
-  return (
-    <div>
-      <Link to='/' style={MenuLinkStyle}>blogs</Link>
-      <Link to='/users' style={MenuLinkStyle}>users</Link>
-      <span><Logout /></span>
-    </div>
-  );
+    return (
+        <SuiMenu>
+            <SuiMenu.Item as={Link} to='/'>
+                blogs
+            </SuiMenu.Item>
+            <SuiMenu.Item as={Link} to='/users'>
+                users
+            </SuiMenu.Item>
+            <SuiMenu.Item><Logout /></SuiMenu.Item>
+        </SuiMenu>
+    );
 };
 
 

@@ -5,6 +5,7 @@ import { useNotification } from '../redux/hooks';
 import { createBlog } from '../redux/reducers/blogReducer';
 import Togglable from './Togglable';
 import BlogForm from './BlogForm';
+import { List } from 'semantic-ui-react';
 
 
 const BlogsView = () => {
@@ -33,18 +34,19 @@ const BlogsView = () => {
           <BlogForm handleBlogForm={addBlog} />
         </Togglable>
       </div>
-      <div>
+      <List>
         <ul>
           {blogs.map(blog =>
-            <li key={blog.id}>
+            <List.Item key={blog.id}>
+                <List.Icon name='blogger'/>
               <Link
                 to={`/blogs/${blog.id}`}>
                 {blog.title} by {blog.author}
               </Link>
-            </li>
+            </List.Item >
           )}
         </ul>
-      </div>
+      </List>
     </div>
   );
 };
